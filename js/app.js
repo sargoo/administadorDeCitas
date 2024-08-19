@@ -12,3 +12,10 @@ const citaObj = {
     fecha: '',
     sintomas: ''
 }
+
+//eventos
+
+pacienteInput.addEventListener('change', ()=> {
+    console.log('hola...');
+    
+})
