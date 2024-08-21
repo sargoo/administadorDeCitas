@@ -17,27 +17,14 @@ const citaObj = {
 
 //eventos
 
-pacienteInput.addEventListener('change', (e)=> {
+pacienteInput.addEventListener('change', datosCita);
+propietarioInput.addEventListener('change', datosCita);
+telefonoInput.addEventListener('change', datosCita);
+fechaInput.addEventListener('change', datosCita);
+horaInput.addEventListener('change', datosCita);
+sintomasInput.addEventListener('change', datosCita);
+
+function datosCita(e){
     citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
-propietarioInput.addEventListener('change', (e)=> {
-    citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
-telefonoInput.addEventListener('change', (e)=> {
-    citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
-fechaInput.addEventListener('change', (e)=> {
-    citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
-horaInput.addEventListener('change', (e)=> {
-    citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
-sintomasInput.addEventListener('change', (e)=> {
-    citaObj[e.target.name] = e.target.value;
-    console.log(citaObj);   
-});
+    console.log(citaObj);
+}
