@@ -6,39 +6,15 @@ const fechaInput = document.querySelector('#fecha');
 const sintomasInput = document.querySelector('#sintomas');
 const formulario = document.querySelector('#formulario-cita');
 const citaObj = {
-    mascota: '',
+    paciente: '',
     propietario: '',
     email: '',
     fecha: '',
     sintomas: ''
 }
 
-//eventos
 
-pacienteInput.addEventListener('change', datosCita);
-propietarioInput.addEventListener('change', datosCita);
-telefonoInput.addEventListener('change', datosCita);
-fechaInput.addEventListener('change', datosCita);
-sintomasInput.addEventListener('change', datosCita);
-formulario.addEventListener('submit', subimitCita);
-
-
-function datosCita(e){
-    citaObj[e.target.name] = e.target.value;
-}
-
-function subimitCita(e){
-    e.preventDefault();
-
-    if (Object.values(citaObj).some(valor => valor.trim() === '')) {
-        new Notificacion({
-            texto: 'Todos los campos son obligatorios',
-            tipo: 'error'
-        })
-        return;
-    }
-}
-
+//clases 
 
 class Notificacion {
     constructor({texto, tipo}){
@@ -78,3 +54,51 @@ class Notificacion {
         },3000);
     }
 }
+
+class AdminCitas{
+
+    constructor(){
+        this.citas = [];
+        console.log(this.citas);
+    }
+
+    agregar(cita){
+        this.citas = [...this.citas, cita];
+
+        console.log(this.citas);
+        
+    }
+}
+
+//eventos
+
+pacienteInput.addEventListener('change', datosCita);
+propietarioInput.addEventListener('change', datosCita);
+telefonoInput.addEventListener('change', datosCita);
+fechaInput.addEventListener('change', datosCita);
+sintomasInput.addEventListener('change', datosCita);
+formulario.addEventListener('submit', subimitCita);
+
+
+function datosCita(e){
+    citaObj[e.target.name] = e.target.value;
+}
+
+const citas = new AdminCitas();
+
+function subimitCita(e){
+    e.preventDefault();
+
+    if (Object.values(citaObj).some(valor => valor.trim() === '')) {
+        new Notificacion({
+            texto: 'Todos los campos son obligatorios',
+            tipo: 'error'
+        })
+
+        return;
+    }
+    
+    citas.agregar(citaObj);
+}
+
+
