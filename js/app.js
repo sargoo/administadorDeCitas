@@ -1,10 +1,15 @@
 //selectores
+
 const pacienteInput = document.querySelector('#paciente');
 const propietarioInput = document.querySelector('#propietario');
 const telefonoInput = document.querySelector('#email');
 const fechaInput = document.querySelector('#fecha');
 const sintomasInput = document.querySelector('#sintomas');
 const formulario = document.querySelector('#formulario-cita');
+
+const contenedorCitas = document.querySelector('#citas');
+
+//Objetos
 const citaObj = {
     paciente: '',
     propietario: '',
@@ -59,14 +64,37 @@ class AdminCitas{
 
     constructor(){
         this.citas = [];
-        console.log(this.citas);
     }
 
     agregar(cita){
         this.citas = [...this.citas, cita];
+        this.mostrar();
 
-        console.log(this.citas);
-        
+    }
+
+    mostrar(){
+        //limpiar html
+
+        while(contenedorCitas.firstChild){
+            contenedorCitas.removeChild(contenedorCitas.firstChild);
+        }
+
+        //genrando las citas con scripting
+
+        this.citas.forEach(cita => {
+            const divCita = document.createElement('DIV');
+            divCita.classList.add('mx-5', 'my-10', 'bg-white', 'shadow-md', 'px-5', 'py-10', 'rounded-xl');
+
+            const paciente = document.createElement('P');
+            paciente.classList.add('font-normal', 'mb-3', 'tgext-gray-700', 'normal-case');
+            paciente.innerHTML = `<span class= "font-bold uppercase">Paciente: </span> ${cita.paciente}`
+
+
+            //inyectar al html
+            divCita.appendChild(paciente);
+
+            contenedorCitas.appendChild(divCita);
+        })
     }
 }
 
@@ -79,6 +107,8 @@ fechaInput.addEventListener('change', datosCita);
 sintomasInput.addEventListener('change', datosCita);
 formulario.addEventListener('submit', subimitCita);
 
+
+//funciones
 
 function datosCita(e){
     citaObj[e.target.name] = e.target.value;
@@ -99,6 +129,7 @@ function subimitCita(e){
     }
     
     citas.agregar(citaObj);
+    //this.mostrar();
 }
 
 
